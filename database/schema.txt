@@ -1,0 +1,142 @@
+
+
+                                                Propolsion DB schema
+
+token{                   
+   id
+   name
+   symbol
+   project_id
+   supply
+   distribuiton_id
+   yield_token_id
+   is_active 
+   status
+}
+
+yield_token{                   
+    id
+    name
+    symbol
+    project_id
+    supply
+    token_id
+    is_active 
+    status
+}
+
+tier{
+    id
+    yield_token_id
+    project_id
+    tier_nr
+    price
+    amount
+    yield_rate
+    is_active
+    status
+}
+
+distribuiton{
+    id
+    token_id
+    platform
+    creator
+    exchange
+    minting_id    
+}
+
+backer{
+    id
+    user_id
+    project_id
+    wallet_id
+    is_active
+    status 
+    
+}
+
+wallet{
+    id
+    user_id
+    token_id
+    amount
+    is_active
+    status
+}
+
+user{
+    id
+    email
+    first_name
+    last_name
+    phone
+    address_1
+    address_2
+    city
+    zip
+    country
+    wallet_id
+    is_active 
+    status
+}
+
+project{        
+	id            
+	title         
+	excerpt       
+	category_id   
+	author_id     
+	limit_date    
+    yeld_token_id
+    crowdfund_conditions_id 
+    is_active
+    status
+}
+
+project_copywrite{
+    id
+    project_id
+    order
+    type_id
+    text
+    small_text
+    numeric
+}
+
+project_copywrite_type{
+    id
+    name
+}
+
+comment{
+    id
+    comment_id
+    text
+    is_active
+    status
+}
+
+reaction{
+    id
+    reaction_type_id
+    project_id
+    comment_id
+}
+
+reaction_type{
+    id
+    name
+}
+
+project_view{
+    id
+    user_id
+    project_id
+    ip
+    mac_address
+    session_id
+}
+
+
+    
