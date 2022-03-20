@@ -11,7 +11,7 @@
 
 ## About The project
 
-I created this project to kickstart your laravel 8 projects with passport for authentication & lighthouse to serve the graphql 
+I created this project to kickstart your laravel 8 projects with passport for authentication & lighthouse to serve the GraphQL 
 
 ### Before starting
 Make sure to have some sort of database server running, here i will exemplify using a mysql server
@@ -42,7 +42,6 @@ DB_PASSWORD=mydatabase_password
 ### Run the migrations by:
 ```  
 php artisan migrate
-
 ```
 ### Get the passport client secret by runnning on the console:
 
@@ -63,7 +62,6 @@ Client secret: zVVIBaxUhN7Pz7BuAp90WoBUYZaRNtqqWyEoES5c
 Copy the client secret pertaining to the ID:2 
 ``` 
 Client secret: zVVIBaxUhN7Pz7BuAp90WoBUYZaRNtqqWyEoES5c
-
 ```
 Paste it on the .env file:
 
@@ -95,13 +93,12 @@ On the GraphQL client console type the following query:
 ```
 Et voilà you should have the query response for the user. 
 
-##EXTRA
-### Run a login Mutation
+## Authentication 
+### Authentication using GraphqQL
 
-On your project search for the schema.graphql file, and change the the query users to:
+On your project search for the `schema.graphql` file, and change the the query users to:
 ``` 
 users: [User!]! @guard(with: ["api"]) @paginate(type: "paginator" model: "App\\Models\\User")
-
 ```
 
 Return to the GraphQL playground and try to execute the same query, you should get an error like this:
@@ -119,6 +116,47 @@ Return to the GraphQL playground and try to execute the same query, you should g
       },
       etc..
 ``` 
+
+Meaning that you now need to be authenticated to interact with this query. No Problem! 😉 
+<br>
+In the playground open a new tab and execute this mutation:
+``` 
+mutation {
+  login(input: {
+    username: "myemail@email.com",
+    password: "123456789qq"
+  }) {
+    access_token
+    refresh_token
+    expires_in
+    token_type
+    user {
+      id
+      email
+      name
+    }
+  }
+}
+``` 
+You’ll get a response with your `access_token` as well as your `refresh_token`.
+<br>
+
+Return to the first tab with the users query and on the bottom of the playground interface you'll find the `HTTP HEADERS` section, click it and type:
+
+{
+    Authorization : "Bearer YOURTOKEN"
+}
+
+Replace `YOURTOKEN` with the access_token that you received on the mutation.
+
+Re-execute the query.
+
+If everything is working, you have your Laravel serving GraphQL as well as an authentication system.
+
+## ⚽️ ENJOY 
+
+
+
 
 
 
