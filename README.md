@@ -9,7 +9,7 @@
 
 
 
-## About The project
+## About this project
 
 I created this project to kickstart your laravel 8 projects with passport for authentication & lighthouse to serve the GraphQL 
 
